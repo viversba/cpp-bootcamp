@@ -60,6 +60,8 @@ target_include_directories(ImGui-SFML SYSTEM PUBLIC
 # -----------------------------------------------------------------------------
 # 4. Configure Executable
 # -----------------------------------------------------------------------------
+# TODO (Section 5 of the README): this glob only collects .cpp files.
+# Extend it so that header files (.h) placed under src/ are also part of the target.
 file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 

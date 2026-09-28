@@ -13,6 +13,8 @@ Install native compiler and low-level system development packages
 - [ ] Clone the bootcamp repository and check out the `w1` branch
 - [ ] Successfully generate the build tree and compile the project from source
 - [ ]  Modify the application source code to display your personal diagnostic card
+- [ ] Update CMakeLists.txt so header (`.h`) files in `src/` are picked up by the build
+- [ ] Move the window size and framerate limit into a `src/config.h` header and use it from `main.cpp`
 - [ ] Verify that your local repository ignores temporary build directory tracking
 
 ## 1. Pre-requisites & System Dependency Installation
@@ -66,7 +68,35 @@ cmake --build build
 cmake --build build --config Release
 ```
 
-## 4. Coding Assignment: Personal Diagnostic Display
+## 4. Modify the CMakeLists.txt file to include header files
+Right now the executable target is built from this line in CMakeLists.txt:
+
+```CMAKE
+file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
+```
+
+This only collects `.cpp` files. Any `.h` file you add under `src/` is not part of the target, so it won't appear in your IDE's project view (Visual Studio, CLion, Xcode) and CMake doesn't treat it as belonging to your program.
+
+**<u>For this workshop, don't put your submission code in the same main.cpp file. Put your code in separate .cpp and .h files.</u>**
+
+## 5. Move the Window Settings into a Header File
+Right now `src/main.cpp` hardcodes its window settings as "magic numbers":
+
+```CPP
+sf::RenderWindow window(sf::VideoMode(1280, 720), "...");
+window.setFramerateLimit(60);
+```
+
+Move these values into a header file so they live in one named place:
+
+1. Create a `src/config.h` file that declares constants for the following settings:
+    - Window width
+    - Window height
+    - Framerate limit
+2. Include `config.h` from `src/main.cpp`.
+3. Replace the hardcoded values in `main.cpp` with the constants you declared, then rebuild and run the program to check that the window still opens with the same size and framerate.
+
+## 6. Coding Assignment: Personal Diagnostic Display
 Once your compilation pipeline successfully runs the default blueprint window, personalize the application layer to verify that state modification functions correctly.
 1. Open src/main.cpp.
 2. Locate the section where the ImGui text layout parameters are constructed.
