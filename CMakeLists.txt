@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(Workshop1 LANGUAGES CXX)
+project(SpaceDefender LANGUAGES CXX)
 
 # Force C++17 standard for compatibility with SFML and ImGui bindings
 set(CMAKE_CXX_STANDARD 17)
